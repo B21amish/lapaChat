@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  height: 100dvh;
+  width: 100dvw;
+  align-items: center;
+  justify-content: center;
+}
+
+.fab {
+  position: fixed !important;
+  bottom: 1rem;
+  right: 1rem;
+}
