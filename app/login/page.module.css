@@ -27,7 +27,12 @@
   width: 100% !important;
 }
 
-.loginlink {
+.forgetpassword {
+  margin-left: auto !important;
+  margin-top: -1rem !important;
+}
+
+.registerlink {
   font-weight: 700;
   margin-left: 5px;
 }

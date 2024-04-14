@@ -1,34 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import styles from "./page.module.css";
-import Typography from "@mui/joy/Typography";
+import { useEffect, useState } from "react";
+
+import ThemeToggle from "@/components/ThemeToggle";
+import config from "@/config/config";
+import { Link } from "@mui/joy";
+import Button from "@mui/joy/Button";
 import Sheet from "@mui/joy/Sheet";
-import IconButton from "@mui/joy/IconButton";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useColorScheme } from "@mui/joy/styles";
+import Typography from "@mui/joy/Typography";
+
+import styles from "./page.module.css";
 
 export default function Home() {
-  // const [mounted, setMounted] = useState(false);
+  const [mounted, changeMounted] = useState(false);
   const { mode, setMode } = useColorScheme();
 
-  // // use effect
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
-  // if (!mounted) return null;
+  // use effect
+  useEffect(() => {
+    changeMounted(true);
+  }, []);
+  if (!mounted) return null;
 
   return (
     <Sheet className={styles.main}>
-      <Typography level="h1">Welcome To LAPA</Typography>
-      <IconButton
-        className={styles.fab}
-        color="primary"
-        variant="solid"
-        onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-      >
-        {mode === "dark" ? "light" : "dark"} mode
-      </IconButton>
+      <Typography level="h1">
+        Welcome To {config.humanReadableAppName}
+      </Typography>
+      <Button>
+        <Link href="register" underline="hover">
+          Register
+        </Link>
+      </Button>
+      <Button>
+        <Link href="login" underline="hover">
+          Login
+        </Link>
+      </Button>
+      <ThemeToggle mode={mode} setMode={setMode} />
     </Sheet>
   );
 }

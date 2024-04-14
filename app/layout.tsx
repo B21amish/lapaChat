@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "@fontsource/inter";
+
+import config from "@/config/config";
 import { CssVarsProvider } from "@mui/joy/styles";
 
 export const metadata: Metadata = {
-  title: "Lapa Chat",
-  description: "End-To-End encrypted chat.",
+  title: config.appName,
+  description: "End-To-End encrypted chat application.",
 };
 
 export default function RootLayout({
