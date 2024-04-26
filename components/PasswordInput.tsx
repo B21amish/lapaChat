@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -7,7 +7,11 @@ import Input from "@mui/joy/Input";
 
 import styles from "./stylesheets/PasswordInput.module.css";
 
-export default function PasswordInput(props: any) {
+export default function PasswordInput(props: {
+  placeholder: string;
+  value: string;
+  changePassword: Dispatch<SetStateAction<string>>;
+}) {
   const { placeholder, value, changePassword } = props;
 
   //state

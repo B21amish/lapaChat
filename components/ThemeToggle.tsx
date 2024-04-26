@@ -9,8 +9,7 @@ export default function ThemeToggle(props: {
   mode: Mode | undefined;
   setMode: (mode: Mode | null) => void;
 }) {
-  const mode = props.mode;
-  const setMode = props.setMode;
+  const { mode, setMode } = props;
 
   return (
     <IconButton

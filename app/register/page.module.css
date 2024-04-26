@@ -12,7 +12,7 @@
   background-color: transparent !important;
   border-color: "primary";
   margin: 0 1rem;
-  padding: 2rem;
+  padding: 2rem !important;
 }
 
 .form {
@@ -28,8 +28,8 @@
 }
 
 .loginlink {
-  font-weight: 700;
-  margin-left: 5px;
+  font-weight: 700 !important;
+  margin-left: 5px !important;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -47,7 +47,7 @@
   /* Styles for medium devices */
   .card {
     margin: 0 1rem;
-    padding: 3rem;
+    padding: 3rem !important;
   }
 }
 

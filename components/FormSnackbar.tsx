@@ -1,14 +1,26 @@
-import Snackbar from "@mui/joy/Snackbar";
+import { Dispatch, SetStateAction } from "react";
 
-export type DefaultColorPalette =
-  | "primary"
-  | "neutral"
-  | "danger"
-  | "success"
-  | "warning";
+import { ColorPaletteProp } from "@mui/joy";
+import Snackbar, { SnackbarOrigin } from "@mui/joy/Snackbar";
 
-export default function FormSnackbar(props: any) {
-  const { color, message, open, changeOpenState } = props;
+interface snackState {
+  open: boolean;
+  message: string;
+  color: ColorPaletteProp;
+  horizontal: SnackbarOrigin["horizontal"];
+  vertical: SnackbarOrigin["vertical"];
+}
+
+export default function FormSnackbar(props: {
+  color: ColorPaletteProp;
+  message: string;
+  open: boolean;
+  changeSnackState: Dispatch<SetStateAction<snackState>>;
+  horizontal: SnackbarOrigin["horizontal"];
+  vertical: SnackbarOrigin["vertical"];
+}) {
+  const { color, message, open, changeSnackState, horizontal, vertical } =
+    props;
 
   // state
   //function
@@ -16,7 +28,10 @@ export default function FormSnackbar(props: any) {
 
   return (
     <Snackbar
-      // anchorOrigin={{ vertical, horizontal }}
+      anchorOrigin={{
+        vertical: vertical,
+        horizontal: horizontal,
+      }}
       autoHideDuration={4000}
       open={open}
       variant="outlined"
@@ -25,7 +40,12 @@ export default function FormSnackbar(props: any) {
         if (reason === "clickaway") {
           return;
         }
-        changeOpenState(false);
+        changeSnackState((prevSnackState) => ({
+          ...prevSnackState,
+          open: false,
+          message: "",
+          color: "primary",
+        }));
       }}
     >
       {message}

@@ -3,6 +3,7 @@ import "./globals.css";
 import "@fontsource/inter";
 
 import config from "@/config/config";
+import { CssBaseline } from "@mui/joy";
 import { CssVarsProvider } from "@mui/joy/styles";
 
 export const metadata: Metadata = {
@@ -17,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <CssVarsProvider defaultMode="system">
+      <CssBaseline />
       <html lang="en">
         <body>{children}</body>
       </html>
