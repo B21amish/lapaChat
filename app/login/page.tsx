@@ -117,7 +117,7 @@ export default function Login() {
             Login
           </Button>
           <Typography level="body-xs">
-            Don't have an account?
+            Don&apos;t have an account?
             <Link href="register" underline="hover">
               <Typography className={styles.registerlink} level="body-xs">
                 Register
