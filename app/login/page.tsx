@@ -1,5 +1,7 @@
 "use client";
 
+import Cookies from "js-cookie";
+import { login } from "lapaauthenticationhelper";
 import { FormEvent, useEffect, useState } from "react";
 
 import FormSnackbar from "@/components/FormSnackbar";
@@ -38,31 +40,29 @@ export default function Login() {
   });
   const { mode, setMode } = useColorScheme();
   const [mounted, changeMounted] = useState(false);
+  const [ipAddress, setIpAddress] = useState("");
+  let userId: string;
+  let accessToken: string;
+  let macAddress: string;
 
   // functions
   const loginFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      // login logic
-      const loginAuthUrl =
-        config.authencationServiceUrl +
-        config.loginRoute +
-        `username=${username}&password=${password}`;
+      let loginResponse = await login(username, password);
+      userId = loginResponse["user_id"];
+      accessToken = loginResponse["access_token"];
 
-      let response = await fetch(loginAuthUrl);
-      if (response.status === 200) {
-        let result = await response.json();
-        console.log(result);
-        changeSnackbarState((prevSnackState) => ({
-          ...prevSnackState,
-          open: true,
-          message: "Login successful.",
-          color: "success",
-        }));
-      } else {
-        let result = await response.text();
-        throw new Error(result);
-      }
+      // store refresh token in cookie
+      let refreshToken = loginResponse["refresh_token"];
+      Cookies.set("RefreshToken", refreshToken);
+
+      changeSnackbarState((prevSnackState) => ({
+        ...prevSnackState,
+        open: true,
+        message: "Login successsful.",
+        color: "success",
+      }));
     } catch (err) {
       if (err instanceof Error) {
         // logic for opening snackbar here

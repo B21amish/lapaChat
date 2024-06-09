@@ -27,10 +27,10 @@ export default function Home() {
       <Typography level="h1">
         Welcome To {config.humanReadableAppName}
       </Typography>
-      <Link href="register">
+      <Link href="lapaChat/register">
         <Button>Register</Button>
       </Link>
-      <Link href="login">
+      <Link href="lapaChat/login">
         <Button>Login</Button>
       </Link>
       <ThemeToggle mode={mode} setMode={setMode} />
