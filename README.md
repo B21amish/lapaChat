@@ -2,6 +2,18 @@
 
 ## change log
 
+### 0.0.4
+
+```
+1. Bug fix w.r.t lapaAuthenticationHelper.
+```
+
+### 0.0.3
+
+```
+1. Integration of login and register with lapaAuthenticationHelper.
+```
+
 ### 0.0.2
 
 ```

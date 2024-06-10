@@ -1,7 +1,7 @@
 "use client";
 
 import Cookies from "js-cookie";
-import { login } from "lapaauthenticationhelper";
+import { LapaAuthenticationHelper } from "lapaauthenticationhelper";
 import { FormEvent, useEffect, useState } from "react";
 
 import FormSnackbar from "@/components/FormSnackbar";
@@ -40,16 +40,22 @@ export default function Login() {
   });
   const { mode, setMode } = useColorScheme();
   const [mounted, changeMounted] = useState(false);
-  const [ipAddress, setIpAddress] = useState("");
   let userId: string;
   let accessToken: string;
-  let macAddress: string;
 
   // functions
   const loginFormSubmit = async (event: FormEvent) => {
     event.preventDefault();
     try {
-      let loginResponse = await login(username, password);
+      const lapaauthenticationhelper = new LapaAuthenticationHelper(
+        config.lapaAuthenticationProtocol,
+        config.lapaAuthenticationIp,
+        config.lapaAuthenticationPort
+      );
+      let loginResponse = await lapaauthenticationhelper.login(
+        username,
+        password
+      );
       userId = loginResponse["user_id"];
       accessToken = loginResponse["access_token"];
 

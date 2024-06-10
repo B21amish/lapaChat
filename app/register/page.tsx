@@ -1,7 +1,7 @@
 "use client";
 
 import Cookies from "js-cookie";
-import { register } from "lapaauthenticationhelper";
+import { LapaAuthenticationHelper } from "lapaauthenticationhelper";
 import { FormEvent, useEffect, useState } from "react";
 
 import FormSnackbar from "@/components/FormSnackbar";
@@ -68,7 +68,15 @@ export default function Register() {
         throw new Error("Password does not match.");
       }
 
-      let registerResponse = await register(username, password);
+      const lapaauthenticationhelper = new LapaAuthenticationHelper(
+        config.lapaAuthenticationProtocol,
+        config.lapaAuthenticationIp,
+        config.lapaAuthenticationPort
+      );
+      let registerResponse = await lapaauthenticationhelper.register(
+        username,
+        password
+      );
       userId = registerResponse["user_id"];
       accessToken = registerResponse["access_token"];
 
