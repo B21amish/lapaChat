@@ -2,6 +2,12 @@
 
 ## change log
 
+### 0.0.5
+
+```
+1. Bug fix in url for register and login page.
+```
+
 ### 0.0.4
 
 ```
