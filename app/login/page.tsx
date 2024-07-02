@@ -2,12 +2,14 @@
 
 import Cookies from "js-cookie";
 import { LapaAuthenticationHelper } from "lapaauthenticationhelper";
-import { FormEvent, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, use, useEffect, useState } from "react";
 
 import FormSnackbar from "@/components/FormSnackbar";
 import PasswordInput from "@/components/PasswordInput";
 import ThemeToggle from "@/components/ThemeToggle";
 import config from "@/config/config";
+import { userData } from "@/context/UserDataContext";
 import { SnackbarOrigin } from "@mui/joy";
 import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
@@ -42,6 +44,8 @@ export default function Login() {
   const [mounted, changeMounted] = useState(false);
   let userId: string;
   let accessToken: string;
+  const router = useRouter();
+  const { changeAccessToken, updateUserId } = userData();
 
   // functions
   const loginFormSubmit = async (event: FormEvent) => {
@@ -56,8 +60,12 @@ export default function Login() {
         username,
         password
       );
+
+      // updste access token and user id in context
       userId = loginResponse["user_id"];
       accessToken = loginResponse["access_token"];
+      changeAccessToken(accessToken);
+      updateUserId(userId);
 
       // store refresh token in cookie
       let refreshToken = loginResponse["refresh_token"];
@@ -69,6 +77,9 @@ export default function Login() {
         message: "Login successsful.",
         color: "success",
       }));
+
+      // redirect to chat page
+      router.push("/chat");
     } catch (err) {
       if (err instanceof Error) {
         // logic for opening snackbar here
